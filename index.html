@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit Recovery Karssell – Padrão Internacional</title>
+    <!-- Favicon placeholder -->
+    <link rel="icon" href="https://placehold.co/32x32/8A2BE2/FFFFFF?text=KR">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f7f7; /* Um branco suave para o fundo */
+            color: #333; /* Cor de texto padrão */
+        }
+        /* Cores personalizadas para Tailwind */
+        :root {
+            --color-lilac-soft: #E6E6FA; /* Lilás Suave */
+            --color-lilac-strong: #8A2BE2; /* Roxo/Lilás Forte */
+            --color-gold: #DAA520; /* Dourado */
+            --color-dark-gray: #333333; /* Cinza Escuro */
+            --color-white: #FFFFFF;
+        }
+        .bg-lilac-soft { background-color: var(--color-lilac-soft); }
+        .text-lilac-strong { color: var(--color-lilac-strong); }
+        .bg-lilac-strong { background-color: var(--color-lilac-strong); }
+        .text-gold { color: var(--color-gold); }
+        .text-dark-gray { color: var(--color-dark-gray); }
+        .border-lilac-strong { border-color: var(--color-lilac-strong); }
+
+        /* Estilo para o botão sticky em mobile */
+        @media (max-width: 767px) {
+            .sticky-buy-button {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 50;
+                padding: 1rem;
+                background-color: var(--color-white);
+                box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+                display: flex;
+                justify-content: center;
+                animation: slideInUp 0.3s ease-out;
+            }
+            @keyframes slideInUp {
+                from { transform: translateY(100%); }
+                to { transform: translateY(0); }
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: var(--color-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            width: 500px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.2s ease;
+        }
+        .modal-close-button:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header / Navbar (Sticky) -->
+    <header class="bg-white shadow-sm py-4 px-6 md:px-12 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-gold text-2xl font-bold">Karssell</span>
+                <span class="text-dark-gray text-xl font-semibold">Recovery</span>
+                <span class="hidden md:inline text-sm text-gray-500">- Padrão Internacional</span>
+            </div>
+            <!-- Links de navegação ou ícones - Para uma landing page simples, pode ser omitido ou usar âncoras -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6 text-dark-gray font-medium">
+                    <li><a href="#produto" class="hover:text-lilac-strong transition-colors">Produto</a></li>
+                    <li><a href="#beneficios" class="hover:text-lilac-strong transition-colors">Benefícios</a></li>
+                    <li><a href="#avaliacoes" class="hover:text-lilac-strong transition-colors">Avaliações</a></li>
+                    <li><a href="#garantia" class="hover:text-lilac-strong transition-colors">Garantia</a></li>
+                </ul>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <!-- Ícone de carrinho - Placeholder -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-dark-gray cursor-pointer hover:text-lilac-strong transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.186 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-8 md:py-16 px-4 md:px-8">
+
+        <!-- Hero Section: Product Image & Main Info -->
+        <section id="produto" class="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-16 mb-16">
+            <div class="flex flex-col items-center md:items-start w-full md:w-1/2">
+                <!-- Main Product Image -->
+                <img id="mainProductImage" src="https://imgur.com/mUpBzVW.jpeg" alt="Kit Recovery Karssell" class="w-full max-w-md md:max-w-none rounded-xl shadow-lg mb-6 border border-gray-100">
+                <!-- Miniature Images -->
+                <div class="flex space-x-3 mt-4">
+                    <img src="https://imgur.com/jIrcXQk.jpeg" alt="Miniatura Kit" class="w-20 h-20 md:w-24 md:h-24 rounded-lg border-2 border-transparent hover:border-lilac-strong cursor-pointer transition-all duration-200 object-cover" onclick="changeMainImage('https://imgur.com/mUpBzVW.jpeg')">
+                    <img src="https://imgur.com/UtGHh7V.jpeg" alt="Miniatura Shampoo" class="w-20 h-20 md:w-24 md:h-24 rounded-lg border-2 border-transparent hover:border-lilac-strong cursor-pointer transition-all duration-200 object-cover" onclick="changeMainImage('https://imgur.com/UtGHh7V.jpeg')">
+                    <img src="https://imgur.com/ddYTWTx.jpeg" alt="Miniatura Máscara" class="w-20 h-20 md:w-24 md:h-24 rounded-lg border-2 border-transparent hover:border-lilac-strong cursor-pointer transition-all duration-200 object-cover" onclick="changeMainImage('https://imgur.com/ddYTWTx.jpeg')">
+                    <img src="https://imgur.com/7zawHO7.jpeg" alt="Miniatura Óleo" class="w-20 h-20 md:w-24 md:h-24 rounded-lg border-2 border-transparent hover:border-lilac-strong cursor-pointer transition-all duration-200 object-cover" onclick="changeMainImage('https://imgur.com/7zawHO7.jpeg')">
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 mt-8 md:mt-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-dark-gray mb-4 leading-tight">
+                    Kit Recovery Karssell
+                </h1>
+                <h2 class="text-xl md:text-2xl font-semibold text-lilac-strong mb-6 flex items-center gap-2">
+                    4 Itens Padrão Internacional
+                    <span class="text-gold text-3xl">⭐</span>
+                </h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Transforme seu ritual de cuidados com os cabelos com o Kit Recovery Karssell! Uma combinação profissional de 4 itens essenciais para tratamento capilar profundo.
+                </p>
+                <p class="text-base text-gray-600 mb-8">
+                    Indicado para todos os tipos de cabelo — especialmente danificados, ressecados ou quimicamente tratados — para hidratação, reconstrução e brilho.
+                </p>
+
+                <!-- Offer Block (Desktop) -->
+                <div class="bg-lilac-soft p-6 rounded-xl shadow-lg mb-8 hidden md:block">
+                    <p class="text-dark-gray text-lg mb-2 line-through">De R$ 144,90</p>
+                    <p class="text-lilac-strong text-4xl font-extrabold mb-3">Por apenas R$ 92,49</p>
+                    <p class="text-dark-gray text-lg mb-4">Pague com <span class="font-bold">Pix</span> e ganhe mais desconto!</p>
+                    <div class="bg-white border border-dashed border-gold text-center py-3 px-4 rounded-lg mb-6">
+                        <p class="text-gold font-semibold text-base md:text-lg">
+                            🎁 Use o cupom <span class="font-bold">BEMVINDO5</span> e ganhe <span class="font-bold">+5% OFF</span> na primeira compra!
+                        </p>
+                    </div>
+                    <button id="buyButtonDesktop" class="btn-buy-lg w-full py-4 text-xl font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                        COMPRAR AGORA
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kit Content Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-dark-gray text-center mb-10">📦 Conteúdo do Seu Kit:</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://imgur.com/UtGHh7V.jpeg" alt="Shampoo Karssell" class="w-24 h-24 mb-4 object-contain">
+                    <h3 class="text-xl font-semibold text-dark-gray mb-2">Shampoo Karssell (300ml)</h3>
+                    <p class="text-gray-600">Limpeza suave sem ressecar os fios.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://imgur.com/C3xh3cM.jpeg" alt="Condicionador Karssell" class="w-24 h-24 mb-4 object-contain">
+                    <h3 class="text-xl font-semibold text-dark-gray mb-2">Condicionador Karssell (300ml)</h3>
+                    <p class="text-gray-600">Hidratação imediata com maciez e brilho.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://imgur.com/ddYTWTx.jpeg" alt="Máscara Karssell" class="w-24 h-24 mb-4 object-contain">
+                    <h3 class="text-xl font-semibold text-dark-gray mb-2">Máscara de Tratamento Intensivo (250g)</h3>
+                    <p class="text-gray-600">Reconstrução com colágeno e queratina.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://imgur.com/7zawHO7.jpeg" alt="Óleo Karssell" class="w-24 h-24 mb-4 object-contain">
+                    <h3 class="text-xl font-semibold text-dark-gray mb-2">Óleo Reparador Karssell (30ml)</h3>
+                    <p class="text-gray-600">Finalização perfeita com controle de frizz.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section id="beneficios" class="bg-lilac-soft p-8 md:p-12 rounded-xl shadow-lg mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-dark-gray text-center mb-10">✨ Por Que Escolher Karssell Recovery?</h2>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg text-gray-700">
+                <li class="flex items-start space-x-3">
+                    <span class="text-lilac-strong text-2xl">✔</span>
+                    <p><span class="font-bold">Fórmula internacional</span> com colágeno e queratina.</p>
+                </li>
+                <li class="flex items-start space-x-3">
+                    <span class="text-lilac-strong text-2xl">✔</span>
+                    <p>Ideal para cabelos <span class="font-bold">danificados ou quimicamente tratados</span>.</p>
+                </li>
+                <li class="flex items-start space-x-3">
+                    <span class="text-lilac-strong text-2xl">✔</span>
+                    <p><span class="font-bold">Hidratação profunda</span> e controle de frizz.</p>
+                </li>
+                <li class="flex items-start space-x-3">
+                    <span class="text-lilac-strong text-2xl">✔</span>
+                    <p><span class="font-bold">Resultados visíveis</span> desde a primeira aplicação.</p>
+                </li>
+                <li class="flex items-start space-x-3">
+                    <span class="text-lilac-strong text-2xl">✔</span>
+                    <p>Pode ser usado em seu <span class="font-bold">cronograma capilar</span>.</p>
+                </li>
+                <li class="flex items-start space-x-3">
+                    <span class="text-lilac-strong text-2xl">✔</span>
+                    <p>Textura leve e <span class="font-bold">não oleosa</span>.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="avaliacoes" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-dark-gray text-center mb-10">⭐ Avaliações de Quem Já Usou:</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-lilac-strong">
+                    <div class="flex items-center mb-3">
+                        <span class="text-gold text-2xl">⭐⭐⭐⭐⭐</span>
+                        <span class="ml-2 text-gray-600 font-medium">Ana S.</span>
+                    </div>
+                    <p class="text-gray-700 italic">“Salvou meu cabelo! A máscara é perfeita e deixou um brilho incrível. Não vivo mais sem!”</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-lilac-strong">
+                    <div class="flex items-center mb-3">
+                        <span class="text-gold text-2xl">⭐⭐⭐⭐</span>
+                        <span class="ml-2 text-gray-600 font-medium">Carlos M.</span>
+                    </div>
+                    <p class="text-gray-700 italic">“Produto top, chegou rápido e bem embalado. Meu cabelo ficou bem mais macio e forte.”</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-lilac-strong">
+                    <div class="flex items-center mb-3">
+                        <span class="text-gold text-2xl">⭐⭐⭐⭐⭐</span>
+                        <span class="ml-2 text-gray-600 font-medium">Laura D.</span>
+                    </div>
+                    <p class="text-gray-700 italic">“Vale cada centavo. Meu cabelo nunca ficou tão macio e com o frizz controlado. Apaixonada!”</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delivery & Guarantee Section -->
+        <section id="garantia" class="bg-white p-8 md:p-12 rounded-xl shadow-lg text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-dark-gray mb-8">🚚 Sua Compra 100% Segura e Garantida!</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-lilac-strong mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3-.895-3-2 1.343-2 3-2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.11C6.202 15.679 8.182 17 12 17c4.97 0 9-3.582 9-8s-4.03-8-9-8-9 3.582-9 8c0 1.02.164 2.015.465 2.973L4 16.5m-2.293 2.293c-.63.63-.186 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4z" />
+                    </svg>
+                    <h3 class="text-xl font-semibold text-dark-gray mb-2">Frete Grátis Nacional</h3>
+                    <p class="text-gray-600">Entregamos em todo o Brasil sem custo adicional para você.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-lilac-strong mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.007 12.007 0 002.944 12c0 2.893 1.144 5.614 3.178 7.648L12 22l5.878-5.878c2.034-2.034 3.178-4.755 3.178-7.648 0-2.062-.647-4.01-1.879-5.616z" />
+                    </svg>
+                    <h3 class="text-xl font-semibold text-dark-gray mb-2">Garantia de Originalidade</h3>
+                    <p class="text-gray-600">Produto com selo de garantia e validade mínima de 12 meses.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-lilac-strong mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <h3 class="text-xl font-semibold text-dark-gray mb-2">Envio Imediato</h3>
+                    <p class="text-gray-600">Despachamos seu pedido rapidamente após a confirmação do pagamento.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call to Action -->
+        <section class="text-center py-12 md:py-20 bg-lilac-soft rounded-xl shadow-lg">
+            <h2 class="text-3xl md:text-5xl font-bold text-dark-gray mb-8 leading-tight">
+                Não espere mais para ter o cabelo dos seus sonhos!
+            </h2>
+            <button id="buyButtonBottom" class="btn-buy-lg py-5 px-12 text-2xl font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+                GARANTA SEU KIT AGORA!
+            </button>
+        </section>
+
+    </main>
+
+    <!-- Sticky Buy Button for Mobile -->
+    <div class="sticky-buy-button md:hidden">
+        <div class="flex items-center justify-between w-full max-w-sm">
+            <div>
+                <p class="text-gray-700 text-sm line-through">R$ 144,90</p>
+                <p class="text-lilac-strong text-2xl font-bold">R$ 92,49</p>
+            </div>
+            <button id="buyButtonMobileSticky" class="btn-buy py-3 px-8 text-lg font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                COMPRAR AGORA
+            </button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="closeModalButton">&times;</button>
+            <h3 class="text-3xl font-bold text-dark-gray mb-6 text-center">Finalizar Compra</h3>
+
+            <div class="flex items-center mb-6 p-4 bg-gray-100 rounded-lg">
+                <img src="https://imgur.com/jIrcXQk.jpeg" alt="Kit Recovery Karssell" class="w-20 h-20 rounded-lg object-cover mr-4">
+                <div>
+                    <p class="text-xl font-semibold text-dark-gray">Kit Recovery Karssell</p>
+                    <p class="text-lilac-strong text-2xl font-bold mt-1">R$ 92,49</p>
+                </div>
+            </div>
+
+            <p class="text-lg text-gray-700 mb-4">Pague com <span class="font-bold text-lilac-strong">Pix</span> e garanta seu produto!</p>
+            <p class="text-sm text-gray-500 mb-6">Você será redirecionado para a página de pagamento para finalizar a compra.</p>
+
+            <button id="pixCheckoutButton" class="btn-buy-lg w-full py-4 text-xl font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                PAGAR COM PIX
+            </button>
+            <p class="text-center text-sm text-gray-500 mt-4">Compra 100% segura!</p>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-dark-gray text-white py-12 px-6 md:px-12 mt-16">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Links -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-gold">Informações</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="#" class="hover:text-lilac-strong transition-colors">Política de Troca e Devolução</a></li>
+                    <li><a href="#" class="hover:text-lilac-strong transition-colors">Perguntas Frequentes (FAQ)</a></li>
+                    <li><a href="#" class="hover:text-lilac-strong transition-colors">Fale Conosco</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media -->
+            <div class="text-center md:text-left">
+                <h3 class="text-xl font-semibold mb-4 text-gold">Siga-nos</h3>
+                <div class="flex justify-center md:justify-start space-x-6">
+                    <a href="#" aria-label="Instagram" class="text-gray-300 hover:text-lilac-strong transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.279.148 4.793 1.642 4.931 4.931.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.279-1.642 4.793-4.931 4.931-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-3.279-.148-4.793-1.642-4.931-4.931-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.148-3.279 1.642-4.793 4.931-4.931 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.359.181-6.417 2.383-6.603 6.603-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.181 4.359 2.383 6.417 6.603 6.603 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c4.359-.181 6.417-2.383 6.603-6.603.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.181-4.359-2.383-6.417-6.603-6.603z"/>
+                            <path d="M12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 8.271a3.136 3.136 0 100-6.272 3.136 3.136 0 000 6.272z"/>
+                            <circle cx="17.292" cy="6.708" r="1.207"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Facebook" class="text-gray-300 hover:text-lilac-strong transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.139-1.333h2.861v-5h-3.999c-3.12 0-4.001 2.019-4.001 4.999v2.001z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="TikTok" class="text-gray-300 hover:text-lilac-strong transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.396 2.007c-.477-.021-.954-.037-1.431-.037-2.128 0-4.225.291-6.19.865-2.032.593-3.676 2.23-4.27 4.262-.574 1.966-.865 4.062-.865 6.19 0 2.128.291 4.225.865 6.19.593 2.032 2.23 3.676 4.262 4.27 1.966.574 4.062.865 6.19.865 2.128 0 4.225-.291 6.19-.865 2.032-.593 3.676-2.23 4.27-4.262.574-1.966.865-4.062.865-6.19 0-2.128-.291-4.225-.865-6.19-.593-2.032-2.23-3.676-4.262-4.27-1.966-.574-4.062-.865-6.19-.865zm-2.396 17.993c-2.43 0-4.707-.333-6.845-1.015-1.78-.567-2.919-1.849-3.411-3.629-.481-1.722-.725-3.56-.725-5.406 0-1.846.244-3.684.725-5.406.492-1.78 1.631-3.062 3.411-3.629 2.138-.682 4.415-1.015 6.845-1.015 2.43 0 4.707.333 6.845 1.015 1.78.567 2.919 1.849 3.411 3.629.481 1.722.725 3.56.725 5.406 0 1.846-.244 3.684-.725 5.406-.492 1.78-1.631 3.062-3.411 3.629-2.138.682-4.415 1.015-6.845 1.015z"/>
+                            <path d="M12.396 2.007c-.477-.021-.954-.037-1.431-.037-2.128 0-4.225.291-6.19.865-2.032.593-3.676 2.23-4.27 4.262-.574 1.966-.865 4.062-.865 6.19 0 2.128.291 4.225.865 6.19.593 2.032 2.23 3.676 4.262 4.27 1.966.574 4.062.865 6.19.865 2.128 0 4.225-.291 6.19-.865 2.032-.593 3.676-2.23 4.27-4.262.574-1.966.865-4.062.865-6.19 0-2.128-.291-4.225-.865-6.19-.593-2.032-2.23-3.676-4.262-4.27-1.966-.574-4.062-.865-6.19-.865zm-2.396 17.993c-2.43 0-4.707-.333-6.845-1.015-1.78-.567-2.919-1.849-3.411-3.629-.481-1.722-.725-3.56-.725-5.406 0-1.846.244-3.684.725-5.406.492-1.78 1.631-3.062 3.411-3.629 2.138-.682 4.415-1.015 6.845-1.015 2.43 0 4.707.333 6.845 1.015 1.78.567 2.919 1.849 3.411 3.629.481 1.722.725 3.56.725 5.406 0 1.846-.244 3.684-.725 5.406-.492 1.78-1.631 3.062-3.411 3.629-2.138.682-4.415 1.015-6.845 1.015z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-gold">Newsletter</h3>
+                <p class="text-gray-300 mb-4">Receba dicas e promoções exclusivas diretamente no seu e-mail!</p>
+                <form class="flex">
+                    <input type="email" placeholder="Seu melhor e-mail..." class="p-3 rounded-l-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-lilac-strong flex-grow">
+                    <button type="submit" class="bg-lilac-strong text-white p-3 rounded-r-lg font-semibold hover:bg-lilac-strong/90 transition-colors">Assinar</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 text-sm mt-12">
+            &copy; 2025 Karssell Recovery. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // Função para trocar a imagem principal
+        function changeMainImage(newSrc) {
+            document.getElementById('mainProductImage').src = newSrc;
+        }
+
+        // Estilos para os botões de compra com cores personalizadas via JS
+        document.addEventListener('DOMContentLoaded', () => {
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .btn-buy, .btn-buy-lg {
+                    background-color: var(--color-lilac-strong);
+                    color: var(--color-white);
+                    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+                }
+                .btn-buy:hover, .btn-buy-lg:hover {
+                    background-color: #7A1FCF; /* Um tom ligeiramente mais escuro para hover */
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.4);
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Modal functionality
+            const checkoutModal = document.getElementById('checkoutModal');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const buyButtons = [
+                document.getElementById('buyButtonDesktop'),
+                document.getElementById('buyButtonBottom'),
+                document.getElementById('buyButtonMobileSticky')
+            ].filter(Boolean); // Filter out nulls if buttons don't exist
+
+            // Function to open the modal
+            function openModal() {
+                checkoutModal.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+            }
+
+            // Function to close the modal
+            function closeModal() {
+                checkoutModal.classList.remove('open');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            // Event listeners for opening modal
+            buyButtons.forEach(button => {
+                button.addEventListener('click', openModal);
+            });
+
+            // Event listener for closing modal
+            closeModalButton.addEventListener('click', closeModal);
+
+            // Close modal when clicking outside of modal content
+            checkoutModal.addEventListener('click', (event) => {
+                if (event.target === checkoutModal) {
+                    closeModal();
+                }
+            });
+
+            // Handle Pix checkout button click
+            const pixCheckoutButton = document.getElementById('pixCheckoutButton');
+            pixCheckoutButton.addEventListener('click', () => {
+                // Redirect to the provided checkout URL
+                window.location.href = 'https://pay.transacaobrasil.com/checkout/4a62498d-dbc5-4676-bf5d-81a745fdc2ed';
+            });
+        });
+    </script>
+</body>
+</html>
