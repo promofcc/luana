@@ -1,22 +1,60 @@
 <!DOCTYPE html><!--[if IE 9]> <html class="ie9 no-js" lang="pt-BR"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--><html class="no-js" lang="pt-BR"><!--<![endif]--><head>
   
-<meta property="og:image" content="https:">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="200">
-<meta property="og:image:height" content="200">
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minha loja - Página Atualizada</title>
+  <style>
+  .shopify-payment-button__button span,
+  .shopify-payment-button__button {
+    font-size: 0 !important;
+  }
 
-  <!-- Basic page needs ================================================== -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <link rel="canonical" href="https://gs1g49-6h.myshopify.com/products/conjunto-de-panelas-inducao-com-revestimento-ceramico-de-chef-5-pecas">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#ff8080">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="author" content="Debutify">
+  .shopify-payment-button__button::before {
+    content: "Comprar";
+    font-size: 16px;
+  }
 
-  <!-- Fav icon ================================================== -->
-  
+  /* Oculta o ícone do carrinho */
+  .site-nav__link--icon.cart-link {
+    display: none !important;
+  }
+  </style>
+</head>
+<body>
+
+<!-- Ícone do carrinho e drawer removidos -->
+<!-- Código HTML removido:
+<li class="site-nav__item">
+  <a href="/cart" class="site-nav__link site-nav__link--icon cart-link js-drawer-open-button-right" aria-controls="CartDrawer">
+    <span class="icon-fallback-text">
+      <span class="fas fa-shopping-cart" aria-hidden="true"></span>
+      <span class="fallback-text">Carrinho</span>
+    </span>
+    <span class="cart-link__bubble animated infinite rubberBand"></span>
+  </a>
+</li>
+
+<div id="CartDrawer" class="drawer drawer--right drawer--has-fixed-header drawer--has-fixed-footer">
+  <div class="drawer__fixed-header">
+    <div class="drawer__header">
+      <div class="drawer__title">
+        <span class="fas fa-shopping-cart" aria-hidden="true"></span>
+        Seu carrinho
+      </div>
+      <div class="drawer__close">
+        <button type="button" class="btn btn-square-small icon-fallback-text drawer__close-button js-drawer-close">
+          <span class="fas fa-times" aria-hidden="true"></span>
+          <span class="fallback-text">Fechar carrinho</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="drawer__inner">
+    <div id="CartContainer" class="drawer__cart"></div>
+  </div>
+</div>
+-->
 
   <!-- Title and description ================================================== -->
   <title>
